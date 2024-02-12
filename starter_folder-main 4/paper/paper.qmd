@@ -47,7 +47,7 @@ In replicating the original model by Zhifeng Cai and Jonathan Heathcote, our met
 #| echo: false
 #| warning: false
 #| message: false
-#| 
+
 # Load necessary libraries
 library(ggplot2)
 library(readxl)
@@ -111,7 +111,21 @@ The stability of public net prices, despite the increase in public sticker price
 Analyzing Figure 1 also prompts consideration of the broader economic context, including changes in the funding models for higher education, the role of government policy, and the economic factors at play during this period, such as recessions and economic booms, which can influence both the supply and demand sides of higher education. The continuous rise in prices, especially in the private sector, may also reflect a competitive market where institutions vie for prestige, faculty, and facilities, which in turn, raises the question of the true value of higher education and the return on investment for students.
 
 
+# Discussion
 
+## Findings
+
+## Dynamics of Canadian Universities 
+
+To explore the dynamics of Canadian universities through the insights provided in the paper by Zhifeng Cai and Jonathan Heathcote and applying a Canadian lens, it's vital to delve into the nuances of tuition trends, income inequality, and access to higher education within Canada. Canadian universities have been experiencing a rise in tuition fees across various programs, with notable increases in professional degrees such as dentistry, medicine, law, and engineering, reflecting a potential barrier to access for students from lower-income backgrounds. The disparities in tuition fees are further exacerbated when considering the level of study, with graduate programs generally demanding higher fees than undergraduate ones, aligning with the expected returns in terms of future employment income.
+
+The socioeconomic landscape in Canada, marked by growing income inequality, has profound implications for higher education access and outcomes. Trends in intergenerational income mobility and income inequality suggest that the economic background of a student's family plays a significant role in their educational opportunities and future earnings, thereby influencing their ability to afford higher education.
+
+Moreover, the stratification of higher education institutions, observed both in the U.S. and Canada, indicates that access to elite institutions is highly influenced by social and economic factors. This stratification is perpetuated by the increasing concentration of resources and student selectivity at more prestigious universities, further challenging the meritocratic ideals of higher education.
+
+Canadian higher education is also characterized by regional disparities in tuition fees and additional compulsory fees, with provinces like Alberta having higher fees compared to the national average. This regional variation adds another layer of complexity to the affordability and accessibility of higher education across the country. The increasing reliance on international students, who pay significantly higher tuition fees, further highlights the financial challenges faced by Canadian universities and the potential impact on domestic students' access to education.
+
+Addressing these challenges requires a multifaceted approach that considers the role of public funding, financial aid, and policies aimed at reducing income inequality and improving access to higher education for all Canadians. Ensuring that higher education remains a pathway for social mobility and economic opportunity is crucial in the face of rising tuition costs and socioeconomic disparities.
 
 \newpage
 
