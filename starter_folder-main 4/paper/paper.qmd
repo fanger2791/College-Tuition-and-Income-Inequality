@@ -121,13 +121,11 @@ library(dplyr)
 library(tidyr)
 
 # Define the path to your Excel file
-file_path <- "/Users/michaelfang/Downloads/SCF_AER_submit.xlsx" # Update with the actual path to your Excel file
+file_path <- "/Users/michaelfang/Downloads/SCF_AER_submit.xlsx"
 
-# Read the "Data for Figure 9" sheet from the Excel file, starting from the second row
+# Read the "Data for Figure 9" sheet from the Excel file
 data <- read_excel(file_path, sheet = "Data for Figure 9", skip = 4)
 
-
-# Reshape the data: create two columns for grid log income and EMG (ML) PDF, with corresponding years
 data_long <- data %>%
   pivot_longer(
     cols = c(`...1`, `...3`),
