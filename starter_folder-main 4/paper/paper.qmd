@@ -115,6 +115,8 @@ Analyzing Figure 1 also prompts consideration of the broader economic context, i
 
 ## Findings
 
+The paper by Zhifeng Cai and Jonathan Heathcote delves into the nuanced dynamics between escalating college tuition fees and the widening gap of income inequality in the United States. It posits a model showcasing how increased income disparities significantly drive up tuition costs, thereby impacting college accessibility. The study highlights the strategic role of financial aid and subsidies in counteracting tuition hikes, yet underscores their insufficiency in bridging the educational divide. Through a detailed examination of higher education market dynamics, the paper sheds light on the competitive practices of colleges, such as differential pricing and the allocation of financial aid, aimed at attracting students. This analysis culminates in a discussion on the broader implications for policy, suggesting that reform in financial aid structures and a reevaluation of higher education funding models are imperative to address these challenges. The findings present a critical perspective on the economic forces shaping the higher education landscape, offering insights that could guide policy reforms aimed at ensuring equitable access to college education amidst growing income inequality.
+
 ## Dynamics of Canadian Universities 
 
 To explore the dynamics of Canadian universities through the insights provided in the paper by Zhifeng Cai and Jonathan Heathcote and applying a Canadian lens, it's vital to delve into the nuances of tuition trends, income inequality, and access to higher education within Canada. Canadian universities have been experiencing a rise in tuition fees across various programs, with notable increases in professional degrees such as dentistry, medicine, law, and engineering, reflecting a potential barrier to access for students from lower-income backgrounds. The disparities in tuition fees are further exacerbated when considering the level of study, with graduate programs generally demanding higher fees than undergraduate ones, aligning with the expected returns in terms of future employment income.
@@ -136,9 +138,6 @@ Addressing these challenges requires a multifaceted approach that considers the 
 
 # Additional data details
 
-# Model details {#sec-model-details}
-
-## Posterior predictive check
 
 
 \newpage
