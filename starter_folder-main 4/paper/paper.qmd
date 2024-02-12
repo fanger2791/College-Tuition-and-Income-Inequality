@@ -110,6 +110,49 @@ The stability of public net prices, despite the increase in public sticker price
 
 Analyzing Figure 1 also prompts consideration of the broader economic context, including changes in the funding models for higher education, the role of government policy, and the economic factors at play during this period, such as recessions and economic booms, which can influence both the supply and demand sides of higher education. The continuous rise in prices, especially in the private sector, may also reflect a competitive market where institutions vie for prestige, faculty, and facilities, which in turn, raises the question of the true value of higher education and the return on investment for students.
 
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+
+library(readxl)
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+
+# Define the path to your Excel file
+file_path <- "/Users/michaelfang/Downloads/SCF_AER_submit.xlsx" # Update with the actual path to your Excel file
+
+# Read the "Data for Figure 9" sheet from the Excel file, starting from the second row
+data <- read_excel(file_path, sheet = "Data for Figure 9", skip = 4)
+
+
+# Reshape the data: create two columns for grid log income and EMG (ML) PDF, with corresponding years
+data_long <- data %>%
+  pivot_longer(
+    cols = c(`...1`, `...3`),
+    names_to = "Year",
+    values_to = "GridLogIncome"
+  ) %>%
+  pivot_longer(
+    cols = c(`2016`, `1989`),
+    names_to = "Temp",
+    values_to = "EMG_ML_PDF"
+  ) %>%
+  filter(Year != Temp) %>%
+  mutate(Year = ifelse(Year == "...1", "2016", "1989")) %>%
+  select(-Temp)
+
+# Plot the data
+ggplot(data_long, aes(x = GridLogIncome, y = EMG_ML_PDF, color = Year)) +
+  geom_line() +
+  labs(title = "Comparison of Income Distribution for 1989 and 2016",
+       x = "Log Household Income",
+       y = "Density") +
+  theme_minimal() +
+  scale_color_manual(values = c("2016" = "blue", "1989" = "red"))
+```
+
 
 # Discussion
 
