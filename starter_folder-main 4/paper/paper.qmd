@@ -44,9 +44,10 @@ In replicating the original model by Zhifeng Cai and Jonathan Heathcote, our met
 # Results
 
 ```{r}
+#| label: fig-stickers
+#| fig-cap: Public vs. Private Sticker and Net Prices Over Time
 #| echo: false
 #| warning: false
-#| message: false
 
 # Load necessary libraries
 library(ggplot2)
@@ -64,7 +65,7 @@ data <- read_excel(file_path, sheet = "FIGURE 1 in PAPER", range = cell_cols("D:
 colnames(data) <- c('Academic Year', 'Public Sticker', 'Public Net', 'Private Sticker', 'Private Net')
 
 # Check the structure of the data to make sure it's what we expect
-str(data)
+#str(data)
 
 # Convert data types if necessary - all price columns should be numeric
 data <- mutate(data, 
@@ -85,7 +86,7 @@ data_long <- gather(data, key = "Price Type", value = "Amount", -`Academic Year`
 # Plot using the reshaped data
 p <- ggplot(data_long, aes(x=`Academic Year`, y=Amount, group=`Price Type`, colour=`Price Type`)) +
   geom_line() +
-  labs(title='Public vs. Private Sticker and Net Prices Over Time',
+  labs(
        x='Academic Year', y='Price in $') +
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
@@ -98,7 +99,7 @@ print(p)
 ggsave("figure_1_plot.png", plot = p, width = 12, height = 8)
 ```
 
-Figure 1, as presented, showcases a multi-decade overview of college tuition and fees in the United States, providing a clear visual representation of trends across both public and private institutions, accounting for inflation to 2016 dollars. The graph is particularly telling in its illustration of the divergent paths between sticker prices and net prices over time.
+@fig-stickers, as presented, showcases a multi-decade overview of college tuition and fees in the United States, providing a clear visual representation of trends across both public and private institutions, accounting for inflation to 2016 dollars. The graph is particularly telling in its illustration of the divergent paths between sticker prices and net prices over time.
 
 The private sticker prices, marked by the red line, demonstrate an unbroken ascent throughout the years, effectively doubling from the early 1990s to 2017. This relentless increase is indicative of a higher education market that is possibly responding to increased demand, or perhaps reflecting rising costs associated with providing education, such as faculty salaries, facilities, and resources.
 
