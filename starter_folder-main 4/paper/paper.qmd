@@ -16,32 +16,28 @@ bibliography: references.bib
 
 # Introduction
 
-In recent years, the escalating cost of college tuition in the United States has emerged as a critical issue, intertwining with the broader narrative of rising income inequality. The paper by  Zhifeng Cai and Jonathan Heathcote addresses this pressing concern by examining the relationship between these two phenomena. Utilizing a competitive model of the college market, the study not only uncovers the mechanisms that link rising income inequality to increasing tuition costs but also sheds light on the consequent impacts on college attendance and social mobility.
+In recent years, the escalating cost of college tuition in the United States has emerged as a critical issue, intertwining with the broader narrative of rising income inequality. The paper by  Zhifeng Cai and Jonathan Heathcote addresses this pressing concern by examining the relationship between these two phenomena. Utilizing a competitive model of the college market, the study not only uncovers the mechanisms that link rising income inequality to increasing tuition costs but also sheds light on the consequent impacts on college attendance and social mobility. Through this paper, we aim to illuminate the unique challenges and opportunities facing the Canadian higher education system in the context of rising tuition costs and income inequality. Incorporating a Canadian perspective into our reproduction study adds a crucial comparative dimension, allowing us to explore the dynamics of university tuition and income inequality within a different national context. This extension acknowledges the distinct structure of the Canadian higher education system and its funding mechanisms, which differ from those in the United States in terms of government support, the magnitude of tuition fees, and the socio-economic landscape.
 
-Central to the paper's findings is the assertion that the surge in U.S. income inequality since the 1990s can account for more than half of the observed increase in average net tuition over the same period. This relationship underscores a critical feedback loop where income disparities not only affect individual capacity to afford higher education but also drive institutional behaviors around tuition setting. Moreover, the paper highlights the detrimental effects of rising tuition on college attendance rates, particularly among lower-income segments, positing significant implications for social mobility and equity.
+Central to the Zhifeng Cai and Jonathan Heathcote paper's findings is the assertion that the surge in U.S. income inequality since the 1990s can account for more than half of the observed increase in average net tuition over the same period. This relationship underscores a critical feedback loop where income disparities not only affect individual capacity to afford higher education but also drive institutional behaviors around tuition setting. Moreover, the paper highlights the detrimental effects of rising tuition on college attendance rates, particularly among lower-income segments, positing significant implications for social mobility and equity.
 
-To build upon the original work of Cai and Heathcote, our project will undertake a reproduction of the study, focusing on two or three of its core aspects. This will involve:
+To build upon the original work of  Zhifeng Cai and Jonathan Heathcote, our project will undertake a reproduction of the study, focusing on two or three of its core aspects. This will involve:
 
 Recreating the Model: We will start by reproducing the competitive college market model used in the original study, ensuring our work is entirely reproducible. This step includes verifying the model's assumptions, computational methods, and data inputs.
+Expanding the Study with a Canadian Lens: Specifically examine how income inequality within Canada affects university tuition, comparing these dynamics with the findings from the U.S. context. This will provide insights into how different policy environments and socio-economic conditions influence the relationship between income inequality and higher education costs.
+
+Our project involves crafting a concise paper that encapsulates the entire reproduction study. This paper will meticulously outline our source and methodology, ensuring clarity on how we've mirrored the original study's model while integrating steps for high reproducibility. It will also present a comparative analysis of our findings against the original study's conclusions, pinpointing any variances and their potential causes. Additionally, the paper will delve into the implications of our policy simulations, offering insights into how income inequality influences college tuition and attendance. Lastly, it will propose directions for future research, highlighting areas within the college tuition-income inequality nexus that remain unexplored, setting the stage for subsequent scholarly inquiry.
 
 # Data {#sec-data}
 
 ## Source
 
+
+
 ## Methodology
 
+In replicating the original model by Zhifeng Cai and Jonathan Heathcote, our methodology was meticulously crafted to mirror their approach with precision, ensuring the highest degree of reproducibility. This entailed a thorough analysis of the original study's model, including its assumptions, variables, and computational methods. We closely followed the procedural steps outlined in their research, from data collection through to the analytical techniques employed to examine the relationship between income inequality and college tuition costs. To guarantee reproducibility, we documented each step of our process in detail, including the coding practices, statistical software used, and the sources of our data. This rigorous approach not only underscores our commitment to transparency and scientific integrity but also enhances the robustness and reliability of our replication efforts.
+
 ## Features
-
-## Results
-
-
-
-
-# Model
-
-
-
-### Model justification
 
 
 # Results
@@ -101,19 +97,18 @@ print(p)
 ggsave("figure_1_plot.png", plot = p, width = 12, height = 8)
 ```
 
+Figure 1, as presented, showcases a multi-decade overview of college tuition and fees in the United States, providing a clear visual representation of trends across both public and private institutions, accounting for inflation to 2016 dollars. The graph is particularly telling in its illustration of the divergent paths between sticker prices and net prices over time.
 
+The private sticker prices, marked by the red line, demonstrate an unbroken ascent throughout the years, effectively doubling from the early 1990s to 2017. This relentless increase is indicative of a higher education market that is possibly responding to increased demand, or perhaps reflecting rising costs associated with providing education, such as faculty salaries, facilities, and resources.
 
+In contrast, the private net prices, shown with the purple line, while following an upward trajectory, do so with a less pronounced slope. This implies that financial aid has absorbed some of the shock of rising sticker prices for students, although it's worth noting that the gap between sticker and net prices appears to widen over time, suggesting that financial aid may not be keeping pace with the increases in sticker prices.
 
+For public institutions, the sticker prices, represented by blue line, show a significant increase but remain substantially lower than those of private institutions. This could reflect the impact of state funding and the different market pressures affecting public colleges and universities. The relatively gentle slope of the public net prices, depicted by the green line, indicates a measure of stability in what students actually pay, possibly due to a combination of state subsidies, federal aid, and institutional grants.
 
-# Discussion
+The stability of public net prices, despite the increase in public sticker prices, could be seen as a reflection of a commitment to maintaining access to higher education. However, the upward trend in both sticker and net prices, even if modest for public institutions, points to a broader trend of increasing financial burden on students and families, which may have significant implications for access to higher education, especially for those from lower-income backgrounds.
 
-## First discussion point {#sec-first-point}
+Analyzing Figure 1 also prompts consideration of the broader economic context, including changes in the funding models for higher education, the role of government policy, and the economic factors at play during this period, such as recessions and economic booms, which can influence both the supply and demand sides of higher education. The continuous rise in prices, especially in the private sector, may also reflect a competitive market where institutions vie for prestige, faculty, and facilities, which in turn, raises the question of the true value of higher education and the return on investment for students.
 
-## Second discussion point
-
-## Third discussion point
-
-## Weaknesses and next steps
 
 \newpage
 
