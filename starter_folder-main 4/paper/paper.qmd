@@ -13,6 +13,7 @@ number-sections: true
 bibliography: references.bib
 ---
 
+https://www.aeaweb.org/articles?id=10.1257/aer.20181027
 
 # Introduction
 
@@ -108,6 +109,8 @@ For public institutions, the sticker prices, represented by blue line, show a si
 The stability of public net prices, despite the increase in public sticker prices, could be seen as a reflection of a commitment to maintaining access to higher education. However, the upward trend in both sticker and net prices, even if modest for public institutions, points to a broader trend of increasing financial burden on students and families, which may have significant implications for access to higher education, especially for those from lower-income backgrounds.
 
 Analyzing Figure 1 also prompts consideration of the broader economic context, including changes in the funding models for higher education, the role of government policy, and the economic factors at play during this period, such as recessions and economic booms, which can influence both the supply and demand sides of higher education. The continuous rise in prices, especially in the private sector, may also reflect a competitive market where institutions vie for prestige, faculty, and facilities, which in turn, raises the question of the true value of higher education and the return on investment for students.
+
+
 
 
 \newpage
