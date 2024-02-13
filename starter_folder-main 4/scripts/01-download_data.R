@@ -1,26 +1,19 @@
 #### Preamble ####
-# Purpose: Downloads and saves the data from [...UPDATE THIS...]
-# Author: Rohan Alexander [...UPDATE THIS...]
-# Date: 11 February 2023 [...UPDATE THIS...]
-# Contact: rohan.alexander@utoronto.ca [...UPDATE THIS...]
-# License: MIT
-# Pre-requisites: [...UPDATE THIS...]
-# Any other information needed? [...UPDATE THIS...]
-
+# Purpose: Instructions on how to acquire the data
+# Author: Michael Fang, Harrison Huang
+# Email: m.fang@mail.utoronto.ca
+# Date: 13 February 2023
 
 #### Workspace setup ####
 library(opendatatoronto)
 library(tidyverse)
-# [...UPDATE THIS...]
 
 #### Download data ####
-# [...ADD CODE HERE TO DOWNLOAD...]
 
-
-
-#### Save data ####
-# [...UPDATE THIS...]
-# change the_raw_data to whatever name you assigned when you downloaded it.
-write_csv(the_raw_data, "inputs/data/raw_data.csv") 
+# To download the Raw Data for replication in excel format can be found at this URL:
+# LINK: https://www.openicpsr.org/openicpsr/project/151521/version/V1/view
+# There are many files but look for "Figure_1_data.xlsx" and "SCF_AER_submit.xlsx"
+# To download, you must create an account and sign in
+# Once the data has been downloaded to your computer, please note of the file path, then in the qmd file, update path to your own accordingly
 
          

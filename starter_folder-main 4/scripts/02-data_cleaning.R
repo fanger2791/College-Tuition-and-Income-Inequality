@@ -49,3 +49,20 @@ print(data)
 write.csv(data, "/Users/michaelfang/College Tuiiton and Income Inequality/starter_folder-main 4/data/analysis_data/college_tuition_fees_analysis_data.csv")
 
 #### Clean data For Figure 2####
+
+library(readxl)
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+
+# Define the path to your Excel file (Please update path to your own path where the data has been downloaded)
+file_path <- "/Users/michaelfang/Downloads/SCF_AER_submit.xlsx"
+
+# Read the "Data for Figure 9" sheet from the Excel file
+data <- read_excel(file_path, sheet = "Data for Figure 9", skip = 4)
+
+# View the cleaned data
+print(data)
+
+#### Save data ####
+write.csv(data, "/Users/michaelfang/College Tuiiton and Income Inequality/starter_folder-main 4/data/analysis_data/income_distribution.csv")
