@@ -58,10 +58,10 @@ library(dplyr)
 library(tidyr)
 library(readr)
 
-# Set the file path (Updated to the new path)
+# Set the file path 
 file_path <- "../data/analysis_data/college_tuition_fees_analysis_data.csv"
 
-# Read the data from the CSV file (Updated function and removed sheet/range arguments)
+# Read the data from the CSV file
 data <- read_csv(file_path)
 
 # Convert data types if necessary - all price columns should be numeric
