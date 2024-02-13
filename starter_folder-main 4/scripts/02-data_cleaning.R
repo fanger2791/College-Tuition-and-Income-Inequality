@@ -1,44 +1,51 @@
 #### Preamble ####
-# Purpose: Cleans the raw plane data recorded by two observers..... [...UPDATE THIS...]
-# Author: Rohan Alexander [...UPDATE THIS...]
-# Date: 6 April 2023 [...UPDATE THIS...]
-# Contact: rohan.alexander@utoronto.ca [...UPDATE THIS...]
-# License: MIT
-# Pre-requisites: [...UPDATE THIS...]
-# Any other information needed? [...UPDATE THIS...]
+# Purpose: Cleans raw data
+# Author: Michael Fang, Harrison Huang
+# Email: m.fang@mail.utoronto.ca
+# Date: 23 January 2023
+
 
 #### Workspace setup ####
 library(tidyverse)
+library(ggplot2)
+library(readxl)
+library(dplyr)
+library(tidyr)
+library(readr)
+library(janitor)
 
-#### Clean data ####
-raw_data <- read_csv("inputs/data/plane_data.csv")
+#### Clean data For Figure 1####
 
-cleaned_data <-
-  raw_data |>
-  janitor::clean_names() |>
-  select(wing_width_mm, wing_length_mm, flying_time_sec_first_timer) |>
-  filter(wing_width_mm != "caw") |>
-  mutate(
-    flying_time_sec_first_timer = if_else(flying_time_sec_first_timer == "1,35",
-                                   "1.35",
-                                   flying_time_sec_first_timer)
-  ) |>
-  mutate(wing_width_mm = if_else(wing_width_mm == "490",
-                                 "49",
-                                 wing_width_mm)) |>
-  mutate(wing_width_mm = if_else(wing_width_mm == "6",
-                                 "60",
-                                 wing_width_mm)) |>
-  mutate(
-    wing_width_mm = as.numeric(wing_width_mm),
-    wing_length_mm = as.numeric(wing_length_mm),
-    flying_time_sec_first_timer = as.numeric(flying_time_sec_first_timer)
-  ) |>
-  rename(flying_time = flying_time_sec_first_timer,
-         width = wing_width_mm,
-         length = wing_length_mm
-         ) |> 
-  tidyr::drop_na()
+# Load the packages
+library(readxl)
+library(dplyr)
+library(readr)
+
+# Set the file path (Please update path to your own path where the data has been downloaded)
+file_path <- "/Users/michaelfang/Downloads/Figure_1_data.xlsx"
+
+# Read the data from the Excel file
+data <- read_excel(file_path, sheet = "FIGURE 1 in PAPER", range = cell_cols("D:H"))
+
+# Set column names manually
+colnames(data) <- c('Academic Year', 'Public Sticker', 'Public Net', 'Private Sticker', 'Private Net')
+
+# Check the structure of the data to make sure it's what we expect
+#str(data)
+
+# Convert data types if necessary - all price columns should be numeric
+data <- mutate(data, 
+               `Public Sticker` = as.numeric(`Public Sticker`),
+               `Public Net` = as.numeric(`Public Net`),
+               `Private Sticker` = as.numeric(`Private Sticker`),
+               `Private Net` = as.numeric(`Private Net`))
+
+# View the cleaned data
+print(data)
 
 #### Save data ####
-write_csv(cleaned_data, "outputs/data/analysis_data.csv")
+
+# Write cleaned data 
+write.csv(data, "/Users/michaelfang/College Tuiiton and Income Inequality/starter_folder-main 4/data/analysis_data/college_tuition_fees_analysis_data.csv")
+
+#### Clean data For Figure 2####

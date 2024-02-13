@@ -24,7 +24,7 @@ Central to the Zhifeng Cai and Jonathan Heathcote paper's findings is the assert
 To build upon the original work of  Zhifeng Cai and Jonathan Heathcote, our project will undertake a reproduction of the study, focusing on two or three of its core aspects. This will involve:
 
 1. Recreating the Model: We will start by reproducing the competitive college market model used in the original study, ensuring our work is entirely reproducible. This step includes verifying the model's assumptions, computational methods, and data inputs.
-2. Expanding the Study with a Canadian Lens: Specifically examine how income inequality within Canada affects university tuition, comparing these dynamics with the findings from the U.S. context. This will provide insights into how different policy environments and socio-economic conditions influence the relationship between income inequality and higher education costs.
+2. Expanding the Study with an analysis on Canadian Universities: Specifically examine how income inequality within Canada affects university tuition, comparing these dynamics with the findings from the U.S. context. This will provide insights into how different policy environments and socio-economic conditions influence the relationship between income inequality and higher education costs.
 
 Our project involves crafting a concise paper that encapsulates the entire reproduction study. This paper will meticulously outline our source and methodology, ensuring clarity on how we've mirrored the original study's model while integrating steps for high reproducibility. It will also present a comparative analysis of our findings against the original study's conclusions, pinpointing any variances and their potential causes. Additionally, the paper will delve into the implications of our policy simulations, offering insights into how income inequality influences college tuition and attendance. Lastly, it will propose directions for future research, highlighting areas within the college tuition-income inequality nexus that remain unexplored, setting the stage for subsequent scholarly inquiry.
 
@@ -43,9 +43,11 @@ In replicating the original model by Zhifeng Cai and Jonathan Heathcote, our met
 
 # Results
 
+## College Tuition And Fees
+
 ```{r}
 #| label: fig-stickers
-#| fig-cap: Public vs. Private Sticker and Net Prices Over Time
+#| fig-cap: College Tuition And Fees, US$(2016)
 #| echo: false
 #| warning: false
 
@@ -54,18 +56,13 @@ library(ggplot2)
 library(readxl)
 library(dplyr)
 library(tidyr)
+library(readr)
 
-# Set the file path
-file_path <- "/Users/michaelfang/Downloads/Figure_1_data.xlsx"
+# Set the file path (Updated to the new path)
+file_path <- "../data/analysis_data/college_tuition_fees_analysis_data.csv"
 
-# Read the data from the Excel file
-data <- read_excel(file_path, sheet = "FIGURE 1 in PAPER", range = cell_cols("D:H"))
-
-# Set column names manually
-colnames(data) <- c('Academic Year', 'Public Sticker', 'Public Net', 'Private Sticker', 'Private Net')
-
-# Check the structure of the data to make sure it's what we expect
-#str(data)
+# Read the data from the CSV file (Updated function and removed sheet/range arguments)
+data <- read_csv(file_path)
 
 # Convert data types if necessary - all price columns should be numeric
 data <- mutate(data, 
@@ -111,7 +108,11 @@ The stability of public net prices, despite the increase in public sticker price
 
 Analyzing Figure 1 also prompts consideration of the broader economic context, including changes in the funding models for higher education, the role of government policy, and the economic factors at play during this period, such as recessions and economic booms, which can influence both the supply and demand sides of higher education. The continuous rise in prices, especially in the private sector, may also reflect a competitive market where institutions vie for prestige, faculty, and facilities, which in turn, raises the question of the true value of higher education and the return on investment for students.
 
+## Comparison of Income Distribution for 1989 and 2016
+
 ```{r}
+#| label: fig-log
+#| fig-cap: Comparison of Income Distribution for 1989 and 2016
 #| echo: false
 #| warning: false
 #| message: false
@@ -121,7 +122,7 @@ library(ggplot2)
 library(dplyr)
 library(tidyr)
 
-# Define the path to your Excel file
+# Define the path to your Excel file (Please update path to your own path where the data has been downloaded)
 file_path <- "/Users/michaelfang/Downloads/SCF_AER_submit.xlsx"
 
 # Read the "Data for Figure 9" sheet from the Excel file
@@ -145,13 +146,20 @@ data_long <- data %>%
 # Plot the data
 ggplot(data_long, aes(x = GridLogIncome, y = EMG_ML_PDF, color = Year)) +
   geom_line() +
-  labs(title = "Comparison of Income Distribution for 1989 and 2016",
+  labs(
        x = "Log Household Income",
        y = "Density") +
   theme_minimal() +
   scale_color_manual(values = c("2016" = "blue", "1989" = "red"))
 ```
 
+@fig-log is a comparison of estimated income distributions for two different years, 1989 and 2016, represented using a probability density function on a logarithmic scale for household income.
+
+The x-axis represents the logarithm of household income, indicating that the data is not raw income but transformed using a logarithmic function, likely to normalize the distribution and to handle the wide range of incomes more effectively. The use of logarithms in income distribution is common as it tends to make the distribution more symmetric and resemble a normal distribution, which is easier to work with statistically.
+
+The y-axis represents the density, which is the probability per unit on the x-axis. In a probability density function, the area under the curve for a given interval represents the probability that a randomly selected household will have an income within that interval.
+
+The increase in the variance of log income suggests that income inequality has widened from 1989 to 2016. This finding correlates with the hypothesis that growing income inequality might be one of the drivers behind the increase in college tuition. This could indicate that while the relative differences in income may have not shifted dramatically on a logarithmic scale, the actual incomes have grown, particularly at the higher end, contributing to the right skewness seen in the 2016 distribution.
 
 # Discussion
 
@@ -172,6 +180,8 @@ Canadian higher education is also characterized by regional disparities in tuiti
 Addressing these challenges requires a multifaceted approach that considers the role of public funding, financial aid, and policies aimed at reducing income inequality and improving access to higher education for all Canadians. Ensuring that higher education remains a pathway for social mobility and economic opportunity is crucial in the face of rising tuition costs and socioeconomic disparities.
 
 ## Potential Weaknessess
+
+
 
 ## Future Research
 
