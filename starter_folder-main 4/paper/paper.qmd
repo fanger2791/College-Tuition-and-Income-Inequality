@@ -161,6 +161,163 @@ The y-axis represents the density, which is the probability per unit on the x-ax
 
 The increase in the variance of log income suggests that income inequality has widened from 1989 to 2016. This finding correlates with the hypothesis that growing income inequality might be one of the drivers behind the increase in college tuition. This could indicate that while the relative differences in income may have not shifted dramatically on a logarithmic scale, the actual incomes have grown, particularly at the higher end, contributing to the right skewness seen in the 2016 distribution.
 
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+
+library(ggplot2)
+library(readxl)
+library(dplyr)
+library(tidyr)
+library(tibble)
+library(knitr)
+
+# Set the file path
+file_path <- "/Users/michaelfang/Downloads/Figure_1_data.xlsx"
+
+## Fig 10 is public college net prices
+## Fig 11 is private college net prices 
+public_college_netprice <- read_excel(file_path, sheet = "Fig 10", range = cell_cols("B:V"))
+private_college_netprice <- read_excel(file_path, sheet = "Fig 11", range = cell_cols("B:V"))
+
+
+## Fig 2013_12 public four year total grants by income and year
+## Fig 2013_13 private four year total grants by income and year
+
+public_college_grants <- read_excel(file_path, sheet = "Fig 2013_12", range = cell_cols("B:T"))
+private_college_grants <- read_excel(file_path, sheet = "Fig 2013_13", range = cell_cols("B:T"))
+
+# modifying column names for better access
+colnames(public_college_grants) <- c("1999_low", "2003_low", "2007_low", "2011_low", "empty1", "1999_sec", "2003_sec", "2007_sec", "2011_sec", "empty2", "1999_third", "2003_third", "2007_third", "2011_third", "empty3", "1999_high", "2003_high", "2007_high", "2011_high", "empty4")
+
+
+# modifying column names for better access
+colnames(private_college_grants) <- c("1999_low", "2003_low", "2007_low", "2011_low", "empty1", "1999_sec", "2003_sec", "2007_sec", "2011_sec", "empty2", "1999_third", "2003_third", "2007_third", "2011_third", "empty3", "1999_high", "2003_high", "2007_high", "2011_high", "empty4")
+
+# creating the column names
+expenditure_type <- c("Net TFRB", "Grants by Income(1)", "Grants by Income(2)", "Grants by Income(3)", "Grants by Income(4)", "Funding for Higher Education per 1000$ of Income", "Tuition Revanue", "Subsidy")
+
+## Fig 14B about the total funding in billions
+#funding_for_higher_education <- read_excel(file_path, sheet = "Fig 15B")
+
+## Fig 15A average state and local funding for higher education per 1000$ of personal income
+state_funding <- read_excel(file_path, sheet = "Fig 15A")
+colnames(state_funding) <- c('Year','Funding Per 1000 Income') 
+
+## Fig 17A public 4 year of subsidies and revenues in different years
+public_rev_subs <- read_excel(file_path, sheet = "Fig 17A")
+colnames(public_rev_subs) <- c("Institution Type","Year", "Net Tuition Revenue", "Subsidy", "Education Related Expenditures") 
+
+## Fig 17B private 4 year of subsidies and revenues in different years
+private_rev_subs <- read_excel(file_path, sheet = "Fig 17B")
+colnames(private_rev_subs) <- c("Institution Type","Year", "Net Tuition Revenue", "Subsidy", "Education Related Expenditures") 
+
+```
+\newpage
+
+## Public Four Year College Data
+
+```{r}
+#| message: false
+#| echo: false
+#| label: tbl-public_data
+#| tbl-cap: Public Four Year College Data
+
+# this is to shorten the name allowing cleaner code and set all items to numeric
+pcn <- public_college_netprice
+pcg <- public_college_grants
+
+
+# rounding numbers to get rid of long decimals
+a <- round(as.numeric(pcg$"1999_low"[13]), 0)
+a1 <- round(as.numeric(pcg$"1999_sec"[13]), 0)
+a2 <-round(as.numeric(pcg$"1999_third"[13]), 0)
+a3 <-round(as.numeric(pcg$"1999_high"[13]), 0)
+a4 <-round(as.numeric(state_funding$`Funding Per 1000 Income`[1]), 3)
+
+# creating column of data1
+pub_earliest_data <-c(pcn$"96-97"[4], a, a1, a2, a3, a4, public_rev_subs$"Net Tuition Revenue"[2], public_rev_subs$"Subsidy"[2])
+
+
+
+b <- round(as.numeric(pcg$"2011_low"[13]), 0)
+b1 <- round(as.numeric(pcg$"2011_sec"[13]), 0)
+b2 <- round(as.numeric(pcg$"2011_third"[13]), 0)
+b3 <- round(as.numeric(pcg$"2011_high"[13]), 0)
+b4 <- round(as.numeric(state_funding$`Funding Per 1000 Income`[31]), 3)
+
+pub_latest_data <-c(public_college_netprice$"16-17"[4],  b, b1, b2, b3, b4, public_rev_subs$"Net Tuition Revenue"[4], public_rev_subs$"Subsidy"[4])
+
+pub_percent_change <-c("62.77%", "68.21%", "80.53%", "69.74%", "78.52%", "-28.31%", "47.35%", "-8.5%")
+
+pub_year_frame <-c("1996 to 2016", "1999 to 2011","1999 to 2011", "1999 to 2011","1999 to 2011","1984 to 2014", "2003 to 2013", "2003 to 2013")
+
+
+# create frame for public data
+public_data <- tibble("Type" = expenditure_type, "Data_1" = pub_earliest_data, "Data_2" = pub_latest_data, "Percent_Change" = pub_percent_change, "Time_Frame" = pub_year_frame) 
+
+# create the table
+public_data_table <-
+head (public_data, 8) |>
+  kable(
+  booktabs = TRUE
+  )
+
+public_data_table
+```
+## Private Four Year College Data
+
+```{r}
+#| message: false
+#| echo: false
+#| label: tbl-private_data
+#| tbl-cap: Private Four Year College Data
+
+
+prcn <- private_college_netprice
+prcg <- private_college_grants
+
+# rounding data and making sure that number is not too long
+c <- round(as.numeric(prcg$"1999_low"[4]), 0)
+c1 <- round(as.numeric(prcg$"1999_sec"[4]), 0)
+c2 <-round(as.numeric(prcg$"1999_third"[4]), 0)
+c3 <-round(as.numeric(prcg$"1999_high"[4]), 0)
+c4 <-round(as.numeric(state_funding$`Funding Per 1000 Income`[1]), 3)
+
+# creating data 1 column
+pri_earliest_data <-c(prcn$"96-97"[4],c, c1, c2, c3, c4, private_rev_subs$"Net Tuition Revenue"[2], private_rev_subs$"Subsidy"[2])
+
+
+# rounding data and making sure that number is not too long
+d <- round(as.numeric(prcg$"2011_low"[4]), 0)
+d1 <- round(as.numeric(prcg$"2011_sec"[4]), 0)
+d2 <-round(as.numeric(prcg$"2011_third"[4]), 0)
+d3 <-round(as.numeric(prcg$"2011_high"[4]), 0)
+d4 <-round(as.numeric(state_funding$`Funding Per 1000 Income`[31]), 3)
+
+
+pri_latest_data <-c(prcn$"16-17"[4], d, d1,d2, d3, d4, private_rev_subs$"Net Tuition Revenue"[4], private_rev_subs$"Subsidy"[4])
+
+pri_percent_change <-c("30.27%", "120%", "80.84%", "28.30%", "97.36%", "-28.31%", "17.62%", "28.86%")
+
+pri_year_frame <-c("1996 to 2016", "1999 to 2011","1999 to 2011", "1999 to 2011","1999 to 2011","1984 to 2014", "2003 to 2013", "2003 to 2013")
+
+
+# create frame for private data
+private_data <- data.frame("Type" = expenditure_type, "Data_1" = pri_earliest_data, "Data_2" = pri_latest_data, "Percent_Change" = pri_percent_change, "Year_Frame" = pri_year_frame) 
+
+
+# create the table
+private_data_table <-
+head (private_data, 8) |>
+  kable(
+  booktabs = TRUE
+  )
+private_data_table
+
+```
+
 # Discussion
 
 ## Findings
