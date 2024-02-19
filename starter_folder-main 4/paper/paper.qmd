@@ -3,12 +3,11 @@ title: "Income Disparity and Its Influence on Higher Education Affordability and
 author: 
   - Michael Fang
   - Harrison Huang
-thanks: "Code and data are available at: LINK."
+thanks: "Code and data are available at: https://github.com/fanger2791/College-Tuition-and-Income-Inequality/tree/main"
 date: today
 date-format: long
-abstract: "First sentence. Second sentence. Third sentence. Fourth sentence."
+abstract:   Throughout the years, we have seen how rising income inequality fuels college tuition hikes, casting a spotlight on the urgent need for policies that bridge the educational divide. This paper is a reproduction on the connection between rising income inequality and the surge in college tuition costs in the United States. Utilizing a detailed economic model, the increasing disparity in income has been a significant driver behind the growth in tuition fees since 1990, accounting for more than half of the observed increase and has also led to a decline in college attendance rates. Extending this analysis through secondary research to include Canadian universities reveals similar trends, indicating a broader North American pattern where income inequality impacts educational accessibility. This comparative approach underscores the global relevance of their findings, suggesting that addressing income disparities could play a crucial role in making higher education more accessible.
 format: pdf
-toc: true
 number-sections: true
 bibliography: references.bib
 ---
@@ -17,16 +16,20 @@ https://www.aeaweb.org/articles?id=10.1257/aer.20181027
 
 # Introduction
 
-In recent years, the escalating cost of college tuition in the United States has emerged as a critical issue, intertwining with the broader narrative of rising income inequality. The paper by  Zhifeng Cai and Jonathan Heathcote addresses this pressing concern by examining the relationship between these two phenomena. Utilizing a competitive model of the college market, the study not only uncovers the mechanisms that link rising income inequality to increasing tuition costs but also sheds light on the consequent impacts on college attendance and social mobility. Through this paper, we aim to illuminate the unique challenges and opportunities facing the Canadian higher education system in the context of rising tuition costs and income inequality. Incorporating a Canadian perspective into our reproduction study adds a crucial comparative dimension, allowing us to explore the dynamics of university tuition and income inequality within a different national context. This extension acknowledges the distinct structure of the Canadian higher education system and its funding mechanisms, which differ from those in the United States in terms of government support, the magnitude of tuition fees, and the socio-economic landscape.
+In recent years, the escalating cost of college tuition in the United States has emerged as a critical issue, intertwining with the broader narrative of rising income inequality. The paper by Zhifeng Cai and Jonathan Heathcote addresses this pressing concern by examining the relationship between these two phenomena. Utilizing a competitive model of the college market, the study not only uncovers the mechanisms that link rising income inequality to increasing tuition costs but also sheds light on the consequent impacts on college attendance and social mobility. Through this paper, we aim to illuminate the unique challenges and opportunities facing the Canadian higher education system in the context of rising tuition costs and income inequality. Incorporating a Canadian perspective into our reproduction study adds a crucial comparative dimension, allowing us to explore the dynamics of university tuition and income inequality within a different national context. This extension acknowledges the distinct structure of the Canadian higher education system and its funding mechanisms, which differ from those in the United States in terms of government support, the magnitude of tuition fees, and the socio-economic landscape.
 
 Central to the Zhifeng Cai and Jonathan Heathcote paper's findings is the assertion that the surge in U.S. income inequality since the 1990s can account for more than half of the observed increase in average net tuition over the same period. This relationship underscores a critical feedback loop where income disparities not only affect individual capacity to afford higher education but also drive institutional behaviors around tuition setting. Moreover, the paper highlights the detrimental effects of rising tuition on college attendance rates, particularly among lower-income segments, positing significant implications for social mobility and equity.
 
-To build upon the original work of  Zhifeng Cai and Jonathan Heathcote, our project will undertake a reproduction of the study, focusing on two or three of its core aspects. This will involve:
+To build upon the original work of Zhifeng Cai and Jonathan Heathcote, our project will undertake a reproduction of the study, focusing on two or three of its core aspects. This will involve:
 
-1. Recreating the Model: We will start by reproducing the competitive college market model used in the original study, ensuring our work is entirely reproducible. This step includes verifying the model's assumptions, computational methods, and data inputs.
-2. Expanding the Study with an analysis on Canadian Universities: Specifically examine how income inequality within Canada affects university tuition, comparing these dynamics with the findings from the U.S. context. This will provide insights into how different policy environments and socio-economic conditions influence the relationship between income inequality and higher education costs.
+1. Recreating Table 3: We will split the table into private college versus public college. In the original work, it was not clearly stated where the data came from or for private two year studies or public four year studies. With that, we will look at data sets from the paper and recreate Table 3 from the original work. The new tables will focus on the price change from the earliest data and most recent data. In addition, the two tables are separated by private four year non profit college versus public four year college. This step includes extensive data cleaning and edits due to excel file formats. All the steps can be found in the source code to increase the reproducibility of our analysis. 
+
+2.  Recreating the Model: We will start by reproducing the competitive college market model used in the original study, ensuring our work is entirely reproducible. This step includes verifying the model's assumptions, computational methods, and data inputs.
+
+3.  Expanding the Study with a Canadian Lens: Specifically examine how income inequality within Canada affects university tuition, comparing these dynamics with the findings from the U.S. context. This will provide insights into how different policy environments and socio-economic conditions influence the relationship between income inequality and higher education costs.
 
 Our project involves crafting a concise paper that encapsulates the entire reproduction study. This paper will meticulously outline our source and methodology, ensuring clarity on how we've mirrored the original study's model while integrating steps for high reproducibility. It will also present a comparative analysis of our findings against the original study's conclusions, pinpointing any variances and their potential causes. Additionally, the paper will delve into the implications of our policy simulations, offering insights into how income inequality influences college tuition and attendance. Lastly, it will propose directions for future research, highlighting areas within the college tuition-income inequality nexus that remain unexplored, setting the stage for subsequent scholarly inquiry.
+
 
 # Data {#sec-data}
 
@@ -38,10 +41,181 @@ Our project involves crafting a concise paper that encapsulates the entire repro
 
 In replicating the original model by Zhifeng Cai and Jonathan Heathcote, our methodology was meticulously crafted to mirror their approach with precision, ensuring the highest degree of reproducibility. This entailed a thorough analysis of the original study's model, including its assumptions, variables, and computational methods. We closely followed the procedural steps outlined in their research, from data collection through to the analytical techniques employed to examine the relationship between income inequality and college tuition costs. To guarantee reproducibility, we documented each step of our process in detail, including the coding practices, statistical software used, and the sources of our data. This approach not only underscores our commitment to transparency and scientific integrity but also enhances the reliability of our replication efforts.
 
+R was the language and environment used for the bulk of this reproduction, alongside 
+
 ## Features
 
 
 # Results
+
+
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+
+library(ggplot2)
+library(readxl)
+library(dplyr)
+library(tidyr)
+library(tibble)
+library(knitr)
+
+# Set the file path
+file_path <- "/Users/michaelfang/Downloads/Figure_1_data.xlsx"
+
+## Fig 10 is public college net prices
+## Fig 11 is private college net prices 
+public_college_netprice <- read_excel(file_path, sheet = "Fig 10", range = cell_cols("B:V"))
+private_college_netprice <- read_excel(file_path, sheet = "Fig 11", range = cell_cols("B:V"))
+
+
+## Fig 2013_12 public four year total grants by income and year
+## Fig 2013_13 private four year total grants by income and year
+
+public_college_grants <- read_excel(file_path, sheet = "Fig 2013_12", range = cell_cols("B:T"))
+private_college_grants <- read_excel(file_path, sheet = "Fig 2013_13", range = cell_cols("B:T"))
+
+# modifying column names for better access
+colnames(public_college_grants) <- c("1999_low", "2003_low", "2007_low", "2011_low", "empty1", "1999_sec", "2003_sec", "2007_sec", "2011_sec", "empty2", "1999_third", "2003_third", "2007_third", "2011_third", "empty3", "1999_high", "2003_high", "2007_high", "2011_high", "empty4")
+
+
+# modifying column names for better access
+colnames(private_college_grants) <- c("1999_low", "2003_low", "2007_low", "2011_low", "empty1", "1999_sec", "2003_sec", "2007_sec", "2011_sec", "empty2", "1999_third", "2003_third", "2007_third", "2011_third", "empty3", "1999_high", "2003_high", "2007_high", "2011_high", "empty4")
+
+# creating the column names
+expenditure_type <- c("Net TFRB", "Grants by Income(1)", "Grants by Income(2)", "Grants by Income(3)", "Grants by Income(4)", "Funding for Higher Education per 1000$ of Income", "Tuition Revanue", "Subsidy")
+
+## Fig 14B about the total funding in billions
+#funding_for_higher_education <- read_excel(file_path, sheet = "Fig 15B")
+
+## Fig 15A average state and local funding for higher education per 1000$ of personal income
+state_funding <- read_excel(file_path, sheet = "Fig 15A")
+colnames(state_funding) <- c('Year','Funding Per 1000 Income') 
+
+## Fig 17A public 4 year of subsidies and revenues in different years
+public_rev_subs <- read_excel(file_path, sheet = "Fig 17A")
+colnames(public_rev_subs) <- c("Institution Type","Year", "Net Tuition Revenue", "Subsidy", "Education Related Expenditures") 
+
+## Fig 17B private 4 year of subsidies and revenues in different years
+private_rev_subs <- read_excel(file_path, sheet = "Fig 17B")
+colnames(private_rev_subs) <- c("Institution Type","Year", "Net Tuition Revenue", "Subsidy", "Education Related Expenditures") 
+
+```
+
+## Public Four Year College Data
+
+```{r}
+#| warning: false
+#| message: false
+#| echo: false
+#| label: tbl-public_data
+#| tbl-cap: Public Four Year College Data
+
+# this is to shorten the name allowing cleaner code and set all items to numeric
+pcn <- public_college_netprice
+pcg <- public_college_grants
+
+
+# rounding numbers to get rid of long decimals
+a <- round(as.numeric(pcg$"1999_low"[13]), 0)
+a1 <- round(as.numeric(pcg$"1999_sec"[13]), 0)
+a2 <-round(as.numeric(pcg$"1999_third"[13]), 0)
+a3 <-round(as.numeric(pcg$"1999_high"[13]), 0)
+a4 <-round(as.numeric(state_funding$`Funding Per 1000 Income`[1]), 3)
+
+# creating column of data1
+pub_earliest_data <-c(pcn$"96-97"[4], a, a1, a2, a3, a4, public_rev_subs$"Net Tuition Revenue"[2], public_rev_subs$"Subsidy"[2])
+
+
+
+b <- round(as.numeric(pcg$"2011_low"[13]), 0)
+b1 <- round(as.numeric(pcg$"2011_sec"[13]), 0)
+b2 <- round(as.numeric(pcg$"2011_third"[13]), 0)
+b3 <- round(as.numeric(pcg$"2011_high"[13]), 0)
+b4 <- round(as.numeric(state_funding$`Funding Per 1000 Income`[31]), 3)
+
+pub_latest_data <-c(public_college_netprice$"16-17"[4],  b, b1, b2, b3, b4, public_rev_subs$"Net Tuition Revenue"[4], public_rev_subs$"Subsidy"[4])
+
+pub_percent_change <-c("62.77%", "68.21%", "80.53%", "69.74%", "78.52%", "-28.31%", "47.35%", "-8.5%")
+
+pub_year_frame <-c("1996 to 2016", "1999 to 2011","1999 to 2011", "1999 to 2011","1999 to 2011","1984 to 2014", "2003 to 2013", "2003 to 2013")
+
+
+# create frame for public data
+public_data <- tibble("Type" = expenditure_type, "Data_1" = pub_earliest_data, "Data_2" = pub_latest_data, "PercentChange" = pub_percent_change, "TimeFrame" = pub_year_frame) 
+
+# create the table
+public_data_table <-
+head (public_data, 8) |>
+  kable(
+  booktabs = TRUE
+  )
+
+public_data_table
+```
+## Private Four Year College Data
+
+```{r}
+#| warning: false
+#| message: false
+#| echo: false
+#| label: tbl-private_data
+#| tbl-cap: Private Four Year College Data
+
+
+prcn <- private_college_netprice
+prcg <- private_college_grants
+
+# rounding data and making sure that number is not too long
+c <- round(as.numeric(prcg$"1999_low"[4]), 0)
+c1 <- round(as.numeric(prcg$"1999_sec"[4]), 0)
+c2 <-round(as.numeric(prcg$"1999_third"[4]), 0)
+c3 <-round(as.numeric(prcg$"1999_high"[4]), 0)
+c4 <-round(as.numeric(state_funding$`Funding Per 1000 Income`[1]), 3)
+
+# creating data 1 column
+pri_earliest_data <-c(prcn$"96-97"[4],c, c1, c2, c3, c4, private_rev_subs$"Net Tuition Revenue"[2], private_rev_subs$"Subsidy"[2])
+
+
+# rounding data and making sure that number is not too long
+d <- round(as.numeric(prcg$"2011_low"[4]), 0)
+d1 <- round(as.numeric(prcg$"2011_sec"[4]), 0)
+d2 <-round(as.numeric(prcg$"2011_third"[4]), 0)
+d3 <-round(as.numeric(prcg$"2011_high"[4]), 0)
+d4 <-round(as.numeric(state_funding$`Funding Per 1000 Income`[31]), 3)
+
+
+pri_latest_data <-c(prcn$"16-17"[4], d, d1,d2, d3, d4, private_rev_subs$"Net Tuition Revenue"[4], private_rev_subs$"Subsidy"[4])
+
+pri_percent_change <-c("30.27%", "120%", "80.84%", "28.30%", "97.36%", "-28.31%", "17.62%", "28.86%")
+
+pri_year_frame <-c("1996 to 2016", "1999 to 2011","1999 to 2011", "1999 to 2011","1999 to 2011","1984 to 2014", "2003 to 2013", "2003 to 2013")
+
+
+# create frame for private data
+private_data <- data.frame("Type" = expenditure_type, "Data_1" = pri_earliest_data, "Data_2" = pri_latest_data, "PercentChange" = pri_percent_change, "YearFrame" = pri_year_frame) 
+
+
+# create the table
+private_data_table <-
+head (private_data, 8) |>
+  kable(
+  booktabs = TRUE
+  )
+private_data_table
+
+```
+
+In the two tables @tbl-public_data and @tbl-private_data, the first column stands for tuition, fees, room and board. This is a summary data of the entire expense at that specific institution. The Grants by Income data then looks grants by year given to each income group. For example, the second row of the table looks at grants given out to people that has an annual income of less than 30,000. The sixth row looks at state funding according to an individual's income by per 1000. For example, if an individual were to make 50,000 a year, state funding for higher education to that individual should be 368.5$. There was no private and public data, as a result the state funding data is the same for both private and public colleges. The last two row looks at the data of the institution's revenue and expenditure on subsidizing students. The year frame was different for each data sets, therefore, we decided to create a separate column for cleaner look for the table. This would prevent N/A cells and could be confusing for readers. 
+
+First, looking at @tbl-public_data, there is a big increase in the net fees at 62.77% increase in just 20 years. Then looking at the grants given out by the public institutions, even though we see a continuous increase of more funding for the two lower income groups, we are still seeing a big increase in percentage for higher income individuals. When looking at state funding, there is even a -28.31 % decrease in the funding for higher education. Lastly looking at the tuition revenue and subsidy, despite making steady profits, the institution on the other hand decreased subsitizing expenditures by 8.5% from 2003 to 2014. 
+
+Second, here are some key findings from @tbl-private_data. There is a less increase of fees at 30.27%. However, the total expenditure is significant more compared to public institutions. Then looking at the grants given out by private institutions, with the lowest income group gaining a significant increase of 120%. Interestingly, the highest group also gained 97.36%. In the same situation, state funding, showed a -28.31 % decrease for higher education. Lastly looking at the tuition revenue and subsidy, 17.62% increase in tuition revenue, and also an increase of 28.86% subsidy expenditures. 
+
+Comparing the two data set, we can see that even though the percentage increase of private institution fees. The net expenditure is still almost three times of public institutions. Overall by income group, private institutions are also a lot more generous in giving out grants, with large numbers compared to public institutions. Private institutions also have a positive percentage increase of subsidy expenditure compared to public institutions despite both having positive tuition revenue over the years. From the table, we can see that private institutions are much more generous in terms of grants and expenditure studies, however, they are also a lot more expensive to attend compared to public schools. 
+
+In attempts to uncover more about income disparity and the accesses of higher education, we will recreate two models from the paper. 
 
 ## College Tuition And Fees
 
@@ -161,163 +335,6 @@ The y-axis represents the density, which is the probability per unit on the x-ax
 
 The increase in the variance of log income suggests that income inequality has widened from 1989 to 2016. This finding correlates with the hypothesis that growing income inequality might be one of the drivers behind the increase in college tuition. This could indicate that while the relative differences in income may have not shifted dramatically on a logarithmic scale, the actual incomes have grown, particularly at the higher end, contributing to the right skewness seen in the 2016 distribution.
 
-```{r}
-#| echo: false
-#| warning: false
-#| message: false
-
-library(ggplot2)
-library(readxl)
-library(dplyr)
-library(tidyr)
-library(tibble)
-library(knitr)
-
-# Set the file path
-file_path <- "/Users/michaelfang/Downloads/Figure_1_data.xlsx"
-
-## Fig 10 is public college net prices
-## Fig 11 is private college net prices 
-public_college_netprice <- read_excel(file_path, sheet = "Fig 10", range = cell_cols("B:V"))
-private_college_netprice <- read_excel(file_path, sheet = "Fig 11", range = cell_cols("B:V"))
-
-
-## Fig 2013_12 public four year total grants by income and year
-## Fig 2013_13 private four year total grants by income and year
-
-public_college_grants <- read_excel(file_path, sheet = "Fig 2013_12", range = cell_cols("B:T"))
-private_college_grants <- read_excel(file_path, sheet = "Fig 2013_13", range = cell_cols("B:T"))
-
-# modifying column names for better access
-colnames(public_college_grants) <- c("1999_low", "2003_low", "2007_low", "2011_low", "empty1", "1999_sec", "2003_sec", "2007_sec", "2011_sec", "empty2", "1999_third", "2003_third", "2007_third", "2011_third", "empty3", "1999_high", "2003_high", "2007_high", "2011_high", "empty4")
-
-
-# modifying column names for better access
-colnames(private_college_grants) <- c("1999_low", "2003_low", "2007_low", "2011_low", "empty1", "1999_sec", "2003_sec", "2007_sec", "2011_sec", "empty2", "1999_third", "2003_third", "2007_third", "2011_third", "empty3", "1999_high", "2003_high", "2007_high", "2011_high", "empty4")
-
-# creating the column names
-expenditure_type <- c("Net TFRB", "Grants by Income(1)", "Grants by Income(2)", "Grants by Income(3)", "Grants by Income(4)", "Funding for Higher Education per 1000$ of Income", "Tuition Revanue", "Subsidy")
-
-## Fig 14B about the total funding in billions
-#funding_for_higher_education <- read_excel(file_path, sheet = "Fig 15B")
-
-## Fig 15A average state and local funding for higher education per 1000$ of personal income
-state_funding <- read_excel(file_path, sheet = "Fig 15A")
-colnames(state_funding) <- c('Year','Funding Per 1000 Income') 
-
-## Fig 17A public 4 year of subsidies and revenues in different years
-public_rev_subs <- read_excel(file_path, sheet = "Fig 17A")
-colnames(public_rev_subs) <- c("Institution Type","Year", "Net Tuition Revenue", "Subsidy", "Education Related Expenditures") 
-
-## Fig 17B private 4 year of subsidies and revenues in different years
-private_rev_subs <- read_excel(file_path, sheet = "Fig 17B")
-colnames(private_rev_subs) <- c("Institution Type","Year", "Net Tuition Revenue", "Subsidy", "Education Related Expenditures") 
-
-```
-\newpage
-
-## Public Four Year College Data
-
-```{r}
-#| message: false
-#| echo: false
-#| label: tbl-public_data
-#| tbl-cap: Public Four Year College Data
-
-# this is to shorten the name allowing cleaner code and set all items to numeric
-pcn <- public_college_netprice
-pcg <- public_college_grants
-
-
-# rounding numbers to get rid of long decimals
-a <- round(as.numeric(pcg$"1999_low"[13]), 0)
-a1 <- round(as.numeric(pcg$"1999_sec"[13]), 0)
-a2 <-round(as.numeric(pcg$"1999_third"[13]), 0)
-a3 <-round(as.numeric(pcg$"1999_high"[13]), 0)
-a4 <-round(as.numeric(state_funding$`Funding Per 1000 Income`[1]), 3)
-
-# creating column of data1
-pub_earliest_data <-c(pcn$"96-97"[4], a, a1, a2, a3, a4, public_rev_subs$"Net Tuition Revenue"[2], public_rev_subs$"Subsidy"[2])
-
-
-
-b <- round(as.numeric(pcg$"2011_low"[13]), 0)
-b1 <- round(as.numeric(pcg$"2011_sec"[13]), 0)
-b2 <- round(as.numeric(pcg$"2011_third"[13]), 0)
-b3 <- round(as.numeric(pcg$"2011_high"[13]), 0)
-b4 <- round(as.numeric(state_funding$`Funding Per 1000 Income`[31]), 3)
-
-pub_latest_data <-c(public_college_netprice$"16-17"[4],  b, b1, b2, b3, b4, public_rev_subs$"Net Tuition Revenue"[4], public_rev_subs$"Subsidy"[4])
-
-pub_percent_change <-c("62.77%", "68.21%", "80.53%", "69.74%", "78.52%", "-28.31%", "47.35%", "-8.5%")
-
-pub_year_frame <-c("1996 to 2016", "1999 to 2011","1999 to 2011", "1999 to 2011","1999 to 2011","1984 to 2014", "2003 to 2013", "2003 to 2013")
-
-
-# create frame for public data
-public_data <- tibble("Type" = expenditure_type, "Data_1" = pub_earliest_data, "Data_2" = pub_latest_data, "Percent_Change" = pub_percent_change, "Time_Frame" = pub_year_frame) 
-
-# create the table
-public_data_table <-
-head (public_data, 8) |>
-  kable(
-  booktabs = TRUE
-  )
-
-public_data_table
-```
-## Private Four Year College Data
-
-```{r}
-#| message: false
-#| echo: false
-#| label: tbl-private_data
-#| tbl-cap: Private Four Year College Data
-
-
-prcn <- private_college_netprice
-prcg <- private_college_grants
-
-# rounding data and making sure that number is not too long
-c <- round(as.numeric(prcg$"1999_low"[4]), 0)
-c1 <- round(as.numeric(prcg$"1999_sec"[4]), 0)
-c2 <-round(as.numeric(prcg$"1999_third"[4]), 0)
-c3 <-round(as.numeric(prcg$"1999_high"[4]), 0)
-c4 <-round(as.numeric(state_funding$`Funding Per 1000 Income`[1]), 3)
-
-# creating data 1 column
-pri_earliest_data <-c(prcn$"96-97"[4],c, c1, c2, c3, c4, private_rev_subs$"Net Tuition Revenue"[2], private_rev_subs$"Subsidy"[2])
-
-
-# rounding data and making sure that number is not too long
-d <- round(as.numeric(prcg$"2011_low"[4]), 0)
-d1 <- round(as.numeric(prcg$"2011_sec"[4]), 0)
-d2 <-round(as.numeric(prcg$"2011_third"[4]), 0)
-d3 <-round(as.numeric(prcg$"2011_high"[4]), 0)
-d4 <-round(as.numeric(state_funding$`Funding Per 1000 Income`[31]), 3)
-
-
-pri_latest_data <-c(prcn$"16-17"[4], d, d1,d2, d3, d4, private_rev_subs$"Net Tuition Revenue"[4], private_rev_subs$"Subsidy"[4])
-
-pri_percent_change <-c("30.27%", "120%", "80.84%", "28.30%", "97.36%", "-28.31%", "17.62%", "28.86%")
-
-pri_year_frame <-c("1996 to 2016", "1999 to 2011","1999 to 2011", "1999 to 2011","1999 to 2011","1984 to 2014", "2003 to 2013", "2003 to 2013")
-
-
-# create frame for private data
-private_data <- data.frame("Type" = expenditure_type, "Data_1" = pri_earliest_data, "Data_2" = pri_latest_data, "Percent_Change" = pri_percent_change, "Year_Frame" = pri_year_frame) 
-
-
-# create the table
-private_data_table <-
-head (private_data, 8) |>
-  kable(
-  booktabs = TRUE
-  )
-private_data_table
-
-```
-
 # Discussion
 
 ## Findings
@@ -338,28 +355,23 @@ Addressing these challenges requires a multifaceted approach that considers the 
 
 ## Potential Weaknessess
 
+There are several potential weaknesses in the findings that warrant consideration. Firstly, the model's assumptions, including a continuous distribution of college quality and linear relationships between variables, might oversimplify the complex, non-linear dynamics present in real-world scenarios. This simplification could introduce inaccuracies in predicting tuition trends and attendance patterns. Secondly, the study's reliance on observed data trends and specific calibrations may not fully encapsulate the intricacies of income distribution, tuition policies, and other socioeconomic factors, leading to potential biases or limitations in the dataset used for analysis.
 
+Moreover, while the model accounts for a broad spectrum of college quality, it might not accurately represent specific types of educational institutions, such as community colleges, vocational schools, and online universities, which do not adhere to the traditional metrics of college quality. Additionally, the focus on income inequality as the primary driver overlooks other significant factors, such as changes in government funding for education, demographic shifts, and evolving labor market demands, which could also influence tuition costs and attendance rates.
+
+Furthermore, the model may not sufficiently consider how policy changes or shifts in household behavior in response to rising tuition and income inequality could alter the college market dynamics. For instance, the increasing prevalence of online education and alternative credentialing pathways might disrupt traditional patterns of college attendance and tuition pricing strategies. Lastly, the study's conclusions are based on historical data up to a certain point, and the long-term applicability of these findings might be limited by emerging trends and changes in the landscape of higher education and economic inequality.
+
+## Limitations to reproducing
+
+From a reproducibility standpoint, the absence of provided code or detailed methodology for recreating the tables, graphs, and statistical analyses by Zhifeng Cai and Jonathan Heathcote introduces significant limitations. The ability to replicate study findings is foundational to the validation and advancement of scientific research. Without access to the exact computational procedures, data analysis scripts, or software used, other researchers are hindered in their ability to verify the results, explore the implications further, or apply the methodology to new datasets. This lack of transparency can impede the reproducing process as others may struggle to build directly on these findings without a clear understanding of the original analysis techniques.
+
+Moreover, the reproducibility issue extends beyond just the recreation of visualizations to the very core of the study's conclusions. The modeling assumptions, data transformations, and statistical methods employed are crucial for understanding the dynamics between income inequality and college tuition. Without clear documentation or code, it becomes challenging to assess the robustness of the model, the sensitivity of the results to different assumptions, or the potential for bias in the analysis. This gap not only affects the credibility of the findings but also limits the potential for educational policymakers, economists, and other stakeholders to apply these insights effectively.
 
 ## Future Research
 
 Future directions should focus on closing gaps in our understanding of the dynamics between income inequality and college tuition. This involves exploring the nuanced effects of policy interventions over the long term and across diverse socio-economic groups. Researchers should consider longitudinal studies that track the impact of tuition changes on generations of students, incorporating variables like technological advancement, labor market shifts, and changing demographics. Policy-wise, a multi-faceted approach is necessary, combining financial aid adjustments, tuition regulation, and innovative funding models for higher education. Engaging with broader societal issues, such as wage stagnation and economic mobility, is crucial for creating more equitable access to higher education. 
 
 Like mentioned in the paper, Cai and Heathcote acknowledges the limitations of using a perfectly competitive model to understand real-world educational markets, where competition among colleges is imperfect and how colleges might use financial aid information to offer less aid to students from wealthier families, particularly at more selective institutions, suggesting these colleges possess significant pricing power. To delve deeper into these complexities, the passage proposes several research extensions such as modeling colleges with unique attributes like location or brand name that could justify differential pricing and attract students with specific preferences. They also raise the idea of exploring how colleges' limited information about applicants' abilities affects students' strategies in applying to multiple institutions. It advocates for broadening the scope of attributes considered in college admissions to include the value of diversity, potentially altering the competitive landscape for colleges seeking to attract students from varied backgrounds. By examining how changes in the value placed on college quality could affect income inequality and intergenerational mobility over time. They hypothesizes that an increase in the financial returns from attending high-quality colleges could lead to greater investment in such education by wealthier families, thereby exacerbating income inequality and reducing social mobility across generations.
-
-
-
-
-
-\newpage
-
-\appendix
-
-# Appendix {-}
-
-
-# Additional data details
-
-
 
 \newpage
 
