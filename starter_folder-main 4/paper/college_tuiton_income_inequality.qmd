@@ -37,12 +37,11 @@ Our project involves crafting a concise paper that encapsulates the entire repro
 
 This paper reproduces several areas of the original paper which is orginaially from the American Economic Association, utilizing the same datasets in the process. These datasets are unfortuntely not publicly accessible, and are hidden behind a sign in wall. 
 
-
 ## Methodology
 
 In replicating the original model by Zhifeng Cai and Jonathan Heathcote, our methodology was meticulously crafted to mirror their approach with precision, ensuring the highest degree of reproducibility. This entailed a thorough analysis of the original study's model, including its assumptions, variables, and computational methods. We closely followed the procedural steps outlined in their research, from data collection through to the analytical techniques employed to examine the relationship between income inequality and college tuition costs. To guarantee reproducibility, we documented each step of our process in detail, including the coding practices, statistical software used, and the sources of our data. This approach not only underscores our commitment to transparency and scientific integrity but also enhances the reliability of our replication efforts.
 
-R was the language and environment used for this reproduction, alongside different packages such as ggplot2, readxl, dplyr, tidyr, knitr packages. 
+R [@citeR] was the language and environment used for this reproduction, with different packages such as tidyverse [@tidyverse], ggplot2 [@ggplot2], readxl [@readxl], dplyr [@dplyr], tidyr [@tidyr], knitr [@knitr] packages. 
 
 ## Variables
 
@@ -145,11 +144,11 @@ colnames(private_rev_subs) <- c("Institution Type","Year", "Net Tuition Revenue"
 ## Public Four Year College Data
 
 ```{r}
+#| label: tbl-public_data
+#| tbl-cap: Public Four Year College Data
 #| warning: false
 #| message: false
 #| echo: false
-#| label: tbl-public_data
-#| tbl-cap: Public Four Year College Data
 
 # this is to shorten the name allowing cleaner code and set all items to numeric
 pcn <- public_college_netprice
@@ -196,11 +195,11 @@ public_data_table
 ## Private Four Year College Data
 
 ```{r}
+#| label: tbl-private_data
+#| tbl-cap: Private Four Year College Data
 #| warning: false
 #| message: false
 #| echo: false
-#| label: tbl-private_data
-#| tbl-cap: Private Four Year College Data
 
 
 prcn <- private_college_netprice
