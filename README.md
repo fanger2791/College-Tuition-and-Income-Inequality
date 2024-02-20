@@ -21,9 +21,6 @@ The repo is structured as:
 
 LINK: https://www.openicpsr.org/openicpsr/project/151521/version/V1/view
 
-There are many files but look for "Figure_1_data.xlsx" and "SCF_AER_submit.xlsx"
-
-To download, you must create an account and sign in. Once the data has been downloaded to your computer, please note of the file path, then in the qmd file, update path to your own accordingly
 2. Run `scripts/simulate_data.R` to simulate what the data could look like
 3. Run `scripts/test_data.R` to test the data
 4. Run `scripts/data_cleaning.R` to generate the clean data
