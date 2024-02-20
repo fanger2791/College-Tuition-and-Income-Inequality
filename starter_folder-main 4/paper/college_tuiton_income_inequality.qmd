@@ -3,7 +3,7 @@ title: "Income Disparity and Its Influence on Higher Education Affordability and
 author: 
   - Michael Fang
   - Harrison Huang
-thanks: "Code and data are available at: https://github.com/fanger2791/College-Tuition-and-Income-Inequality/tree/main"
+thanks: "Code and data are available at: https://github.com/fanger2791/College-Tuition-and-Income-Inequality/tree/main. Replication on Social Science Reproduction: https://www.socialsciencereproduction.org/reproductions/d456357c-d73d-4bce-a6ba-178bac339c7e/index"
 date: today
 date-format: long
 abstract:   Throughout the years, we have seen how rising income inequality fuels college tuition hikes, casting a spotlight on the urgent need for policies that bridge the educational divide. This paper is a reproduction on the connection between rising income inequality and the surge in college tuition costs in the United States. Utilizing a detailed economic model, the increasing disparity in income has been a significant driver behind the growth in tuition fees since 1990, accounting for more than half of the observed increase and has also led to a decline in college attendance rates. Extending this analysis through secondary research to include Canadian universities reveals similar trends, indicating a broader North American pattern where income inequality impacts educational accessibility. This comparative approach underscores the global relevance of their findings, suggesting that addressing income disparities could play a crucial role in making higher education more accessible.
